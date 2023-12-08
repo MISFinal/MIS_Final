@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: auto;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-button:hover {
+            color: #333;
+        }
+
+        .welcome-message {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    {% if new_user %}
+        <div id="welcomeModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <p class="welcome-message">Welcome, {{ new_user }}</p>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                var modal = document.getElementById("welcomeModal");
+                var span = document.getElementsByClassName("close-button")[0];
+
+                modal.style.display = "flex";
+
+                span.onclick = function() {
+                    modal.style.display = "none";
+                };
+
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                };
+            });
+        </script>
+    {% endif %}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <!-- ... head content ... -->
+    </head>
+    <body>
+        <!-- Welcome Modal and Products Display Code Remains Same -->
+    
+        <!-- Table for Categories -->
+        <div class="categories-container">
+            <table>
+                {% for category in categories %}
+                    <tr>
+                        <td>{{ category.name }}</td>  <!-- Replace 'name' with your actual field name -->
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td>No categories found.</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    
+        <style>
+            /* ... Existing styles ... */
+    
+            .categories-container {
+                width: 100%;
+                margin-top: 20px;
+            }
+            
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+    
+            td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: center;
+            }
+    
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+    
+            tr:hover {
+                background-color: #ddd;
+            }
+        </style>
+    </body>
+    </html>
+    
+</body>
+</html>
