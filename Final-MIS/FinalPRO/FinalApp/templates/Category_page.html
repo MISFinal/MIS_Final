@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ category.name }}</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #205e9c;
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+            margin-top: 90px;
+        }
+
+        .product {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .product h2 {
+            color: #205e9c;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .product p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .no-products {
+            font-size: 1rem;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ category.name }}</h1>
+
+    <form action="{% url 'product_search' category.name %}" method="get">
+        <input type="text" name="search_query" placeholder="Search products...">
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="products-container">
+        {% for product in products %}
+            <div class="product">
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.price }} KD</p>
+                <p>Quantity Available: {{ product.quantity_available }}</p>
+                <p>Serial number: {{ product.serial_number }}</p>            </div>
+        {% empty %}
+            <p class="no-products">No products found in this category.</p>
+        {% endfor %}
+    </div>
+
+</body>
+
+</html>
