@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+        body, html {
+            height: 100%;
             margin: 0;
-            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #205e9c;
             display: flex;
             justify-content: center;
             align-items: center;
+            text-align: center;
         }
 
         .modal {
@@ -34,7 +35,7 @@
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: auto;
             max-width: 300px;
             text-align: center;
@@ -57,6 +58,42 @@
             color: #333;
             margin-bottom: 15px;
         }
+
+        .categories-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .categories-container:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
     </style>
 </head>
 <body>
@@ -67,79 +104,21 @@
                 <p class="welcome-message">Welcome, {{ new_user }}</p>
             </div>
         </div>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', (event) => {
-                var modal = document.getElementById("welcomeModal");
-                var span = document.getElementsByClassName("close-button")[0];
-
-                modal.style.display = "flex";
-
-                span.onclick = function() {
-                    modal.style.display = "none";
-                };
-
-                window.onclick = function(event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                };
-            });
-        </script>
     {% endif %}
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <!-- ... head content ... -->
-    </head>
-    <body>
-        <!-- Welcome Modal and Products Display Code Remains Same -->
-    
-        <!-- Table for Categories -->
-        <div class="categories-container">
-            <table>
-                {% for category in categories %}
-                    <tr>
-                        <td>{{ category.name }}</td>  <!-- Replace 'name' with your actual field name -->
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td>No categories found.</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-    
-        <style>
-            /* ... Existing styles ... */
-    
-            .categories-container {
-                width: 100%;
-                margin-top: 20px;
-            }
-            
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-    
-            td {
-                border: 1px solid #ddd;
-                padding: 8px;
-                text-align: center;
-            }
-    
-            tr:nth-child(even) {
-                background-color: #f2f2f2;
-            }
-    
-            tr:hover {
-                background-color: #ddd;
-            }
-        </style>
-    </body>
-    </html>
-    
+    <div class="categories-container">
+        <h1>Welcome to Our Products Catalog</h1>
+        <table>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.name }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td>No categories found.</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 </body>
 </html>

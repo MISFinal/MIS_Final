@@ -21,7 +21,7 @@ from FinalApp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('HomePage/', views.homepage, name='HomePage'),
+    path('Homepage/', views.homepage, name='HomePage'),
     path('register/', views.register, name='register'),
     path('login/', views.MyLoginView.as_view(), name='login'),
     path('product/<int:product_id>/', views.product_detail_view, name='product_detail'),
