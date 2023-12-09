@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     dob = models.DateField(verbose_name="Date of Birth")
@@ -17,7 +18,6 @@ class Product(models.Model):
     quantity_available = models.IntegerField()
     serial_number = models.CharField(max_length=255)
     category = models.CharField(max_length=255, default='Default Category')
-    category = models.CharField(max_length=255)
     review_comment = models.TextField(blank=True)
 
     def __str__(self):
@@ -67,3 +67,9 @@ class Receipt(models.Model):
 
     def __str__(self):
         return f"Receipt {self.id} for Order {self.order.id}"
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+    def __str__(self):
+        return self.name

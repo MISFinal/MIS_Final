@@ -5,16 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+        body, html {
+            height: 100%;
             margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #205e9c;
+            color: white;
+            text-align: center;
         }
 
+        .category-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .category-box {
+            background-color: #2a69ac;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+    
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100px; 
+}
+
+        .category-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-box h2 {
+         margin: 0; 
+        font-size: 1.5rem;
+        text-align: center; 
+}
+
+        
         .modal {
             display: none; 
             position: fixed;
@@ -34,10 +71,11 @@
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: auto;
             max-width: 300px;
             text-align: center;
+            color: black; 
         }
 
         .close-button {
@@ -61,21 +99,32 @@
 </head>
 <body>
     {% if new_user %}
-        <div id="welcomeModal" class="modal">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <p class="welcome-message">Welcome, {{ new_user }}</p>
-            </div>
+    <div id="welcomeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p class="welcome-message">Welcome, {{ new_user }}</p>
         </div>
+    </div>
+    {% endif %}
 
-        <script>
-            document.addEventListener('DOMContentLoaded', (event) => {
-                var modal = document.getElementById("welcomeModal");
-                var span = document.getElementsByClassName("close-button")[0];
+    <div class="category-container">
+        {% for category in categories %}
+        <a href="#" class="category-box">
+            <h2>{{ category.name }}</h2>
+        </a>
+        {% empty %}
+        <p>No categories found.</p>
+        {% endfor %}
+    </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var modal = document.getElementById("welcomeModal");
+            var closeButton = document.querySelector(".close-button");
+
+            if (modal) {
                 modal.style.display = "flex";
-
-                span.onclick = function() {
+                closeButton.onclick = function() {
                     modal.style.display = "none";
                 };
 
@@ -84,62 +133,8 @@
                         modal.style.display = "none";
                     }
                 };
-            });
-        </script>
-    {% endif %}
-
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <!-- ... head content ... -->
-    </head>
-    <body>
-        <!-- Welcome Modal and Products Display Code Remains Same -->
-    
-        <!-- Table for Categories -->
-        <div class="categories-container">
-            <table>
-                {% for category in categories %}
-                    <tr>
-                        <td>{{ category.name }}</td>  <!-- Replace 'name' with your actual field name -->
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td>No categories found.</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-    
-        <style>
-            /* ... Existing styles ... */
-    
-            .categories-container {
-                width: 100%;
-                margin-top: 20px;
             }
-            
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-    
-            td {
-                border: 1px solid #ddd;
-                padding: 8px;
-                text-align: center;
-            }
-    
-            tr:nth-child(even) {
-                background-color: #f2f2f2;
-            }
-    
-            tr:hover {
-                background-color: #ddd;
-            }
-        </style>
-    </body>
-    </html>
-    
+        });
+    </script>
 </body>
 </html>
