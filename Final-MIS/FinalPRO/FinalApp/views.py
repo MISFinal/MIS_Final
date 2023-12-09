@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404, render
 def index(request):
     return render(request, 'index.html')
 
+
 def homepage(request):
     new_user = request.session.pop('new_user', None)
     products = Product.objects.all()
@@ -17,6 +18,7 @@ def homepage(request):
         'products': products,
         'categories': categories
     })
+
 
 def register(request):
     if request.method == 'POST':

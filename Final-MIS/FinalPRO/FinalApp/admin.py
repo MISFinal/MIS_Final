@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import UserProfile, Product, Inventory, Cart, CartItem, Order, OrderDetails, Receipt
+from .models import UserProfile, Product, Inventory, Cart, CartItem, Order, OrderDetails, Receipt , Category
 
 # Register your models here.
 
@@ -42,3 +42,9 @@ class OrderDetailsAdmin(admin.ModelAdmin):
 class ReceiptAdmin(admin.ModelAdmin):
     list_display = ('order', 'number_of_items')
     search_fields = ('order__id',)
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',) 
+    search_fields = ('name',)  
