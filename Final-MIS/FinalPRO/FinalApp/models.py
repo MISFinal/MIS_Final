@@ -2,6 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+    def __str__(self):
+        return self.name
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     dob = models.DateField(verbose_name="Date of Birth")
@@ -13,11 +20,11 @@ class UserProfile(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity_available = models.IntegerField()
     serial_number = models.CharField(max_length=255)
-    category = models.CharField(max_length=255, default='Default Category')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)  # ForeignKey relationship to Category
     review_comment = models.TextField(blank=True)
 
     def __str__(self):
@@ -69,7 +76,3 @@ class Receipt(models.Model):
         return f"Receipt {self.id} for Order {self.order.id}"
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=255)
-    def __str__(self):
-        return self.name
