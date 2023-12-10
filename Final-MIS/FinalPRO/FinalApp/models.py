@@ -24,7 +24,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity_available = models.IntegerField()
     serial_number = models.CharField(max_length=255)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)  # ForeignKey relationship to Category
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)  
     review_comment = models.TextField(blank=True)
 
     def __str__(self):
