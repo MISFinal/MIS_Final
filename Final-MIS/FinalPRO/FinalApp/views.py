@@ -67,9 +67,6 @@ def search_products(request, category_name):
 
 
 
-
-# views.py
-
 from django.shortcuts import render
 
 def homepage_view(request):
